@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funhole Sch00L</title>
+    <link rel="icon" href="https://i.ibb.co/v3WNNDZ/fs.png" type="image/png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        #container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        #myIframe {
+            border-radius: 20px;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        #blocked-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            display: none;
+        }
+        
+        #fullscreen-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .fullscreen-icon {
+            width: 30px;
+            height: 30px;
+            background-image: url('https://image.flaticon.com/icons/png/512/709/709613.png');
+            background-size: cover;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(to right, #4CAF50, #00C9FF);
+            color: #fff;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background: linear-gradient(to right, #00C9FF, #4CAF50);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <iframe id="myIframe" src="https://example.com" frameborder="0"></iframe>
+        <div id="blocked-message">
+            <p style="font-size: 24px; font-weight: bold;">Looks like you're not on Funhole Sch00L</p>
+            <a href="https://funholeschool.github.io" class="button">Play Funhole Sch00L</a>
+        </div>
+    </div>
+
+    <div id="fullscreen-button" onclick="toggleFullScreen()">
+        <div class="fullscreen-icon"></div>
+    </div>
+
+    <script>
+        // Check if the page is embedded in Google Sites
+        if (window != window.top) {
+            document.getElementById('myIframe').style.display = 'none';
+            document.getElementById('blocked-message').style.display = 'block';
+        }
+
+        function toggleFullScreen() {
+            var iframe = document.getElementById('myIframe');
+            if (!document.fullscreenElement) {
+                iframe.requestFullscreen().catch(err => {
+                    console.error('Failed to enter fullscreen mode:', err);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+    </script>
+</body>
+</html>
