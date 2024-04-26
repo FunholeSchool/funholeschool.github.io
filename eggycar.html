@@ -5,26 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eggy Car</title>
     <link rel="icon" href="https://i.ibb.co/BsJtCdr/EGG-removebg-preview-1.png" type="image/png">
-       <style>
+     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(45deg, #FF5733, #FFC300, #DAF7A6, #9AECDB);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-
-        @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            background: linear-gradient(135deg, #FF5733, #9AECDB);
         }
 
         #container {
@@ -76,13 +62,15 @@
             position: fixed;
             bottom: 20px;
             left: 20px;
-            border-radius: 20px 0 0 0;
             background-color: rgba(0, 0, 0, 0.5);
             padding: 10px 20px;
             color: #fff;
             cursor: pointer;
             transition: width 0.3s ease;
             z-index: 100;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(135deg, #0AFA9A, #32A2D6);
         }
 
         #more-games:hover {
@@ -97,14 +85,28 @@
             background-size: cover;
             margin-right: 10px;
         }
+
+        #play-funhole-school {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #0AFA9A, #32A2D6);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        #play-funhole-school:hover {
+            background: linear-gradient(135deg, #32A2D6, #0AFA9A);
+        }
     </style>
 </head>
 <body>
     <div id="container">
-        <iframe id="myIframe" src="https://webglmath.github.io/eggy-car/" frameborder="0"></iframe>
+        <iframe id="myIframe" src="https://example.com" frameborder="0"></iframe>
         <div id="blocked-message">
             <p style="font-size: 24px; font-weight: bold;">Looks like you're not on Funhole Sch00L</p>
-            <a href="https://funholeschool.com" class="button">Play Funhole Sch00L</a>
+            <a href="https://funholeschool.github.io" id="play-funhole-school">Play Funhole Sch00L</a>
         </div>
     </div>
 
