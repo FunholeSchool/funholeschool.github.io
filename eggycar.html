@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eggy Car</title>
-    <link rel="icon" href="https://i.ibb.co/BsJtCdr/EGG-removebg-preview-1.png" type="image/png">
-      <style>
+    <title>Funhole Sch00L</title>
+    <link rel="icon" href="https://i.ibb.co/v3WNNDZ/fs.png" type="image/png">
+    <style>
         body {
             margin: 0;
             padding: 0;
@@ -15,10 +15,24 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
+            width: 100%;
+            height: 100%;
             border-radius: 20px;
+            border: 20px solid transparent;
+            background-clip: padding-box;
+            animation: animateBorder 5s linear infinite;
+        }
+
+        @keyframes animateBorder {
+            0% {
+                border-color: #4CAF50;
+            }
+            50% {
+                border-color: #00C9FF;
+            }
+            100% {
+                border-color: #4CAF50;
+            }
         }
 
         #myIframe {
@@ -54,19 +68,49 @@
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/OOjs_UI_icon_fullScreen.svg/1200px-OOjs_UI_icon_fullScreen.svg.png');
             background-size: cover;
         }
+
+        #more-games {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            border-radius: 20px 0 0 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            color: #fff;
+            cursor: pointer;
+            transition: width 0.3s ease;
+            z-index: 100;
+        }
+
+        #more-games:hover {
+            width: 120px;
+        }
+
+        .games-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/8002/8002111.png');
+            background-size: cover;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
     <div id="container">
-        <iframe id="myIframe" src="https://webglmath.github.io/eggy-car/" frameborder="0"></iframe>
+        <iframe id="myIframe" src="https://example.com" frameborder="0"></iframe>
         <div id="blocked-message">
             <p style="font-size: 24px; font-weight: bold;">Looks like you're not on Funhole Sch00L</p>
-            <a href="funholeschool.github.io" class="button">Play Funhole Sch00L</a>
+            <a href="https://funholeschool.com" class="button">Play Funhole Sch00L</a>
         </div>
     </div>
 
     <div id="fullscreen-button" onclick="toggleFullScreen()">
         <div class="fullscreen-icon"></div>
+    </div>
+
+    <div id="more-games" onclick="openGames()">
+        <div class="games-icon"></div>More Games
     </div>
 
     <script>
@@ -85,6 +129,10 @@
             } else {
                 document.exitFullscreen();
             }
+        }
+
+        function openGames() {
+            window.open('https://funholeschool.github.io', '_blank');
         }
     </script>
 </body>
