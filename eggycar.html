@@ -5,12 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eggy Car</title>
     <link rel="icon" href="https://i.ibb.co/BsJtCdr/EGG-removebg-preview-1.png" type="image/png">
-     <style>
+    <style>
         body {
             margin: 0;
             padding: 0;
             font-family: 'Roboto', sans-serif;
+        }
+
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(135deg, #FF5733, #9AECDB);
+            z-index: -1;
         }
 
         #container {
@@ -102,6 +111,8 @@
     </style>
 </head>
 <body>
+    <div id="background"></div>
+
     <div id="container">
         <iframe id="myIframe" src="https://example.com" frameborder="0"></iframe>
         <div id="blocked-message">
@@ -139,7 +150,11 @@
         function openGames() {
             window.open('https://funholeschool.github.io', '_blank');
         }
+
+        document.getElementById('play-funhole-school').addEventListener('click', function(event) {
+            event.preventDefault();
+            window.open('https://funholeschool.github.io', '_blank');
+        });
     </script>
 </body>
 </html>
-
