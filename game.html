@@ -1,1 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashing Rounded Corner Rectangle</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: transparent;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 200px;
+            text-align: center;
+            padding: 20px;
+            border-radius: 20px;
+            animation: flashColors 2s infinite alternate;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .animated_rainbow_1 {
+            font-size: 98px;
+            font-family: Arial Black, Gadget, sans-serif;
+            background-image: -webkit-linear-gradient(left, #f00, #ff2b00, #f50, #ff8000, #fa0, #ffd500, #ff0, #d4ff00, #af0, #80ff00, #5f0, #2bff00, #0f0, #00ff2a, #0f5, #00ff80, #0fa, #00ffd5, #0ff, #00d5ff, #0af, #0080ff, #05f, #002aff, #00f, #2b00ff, #50f, #8000ff, #a0f, #d400ff, #f0f, #ff00d4, #f0a, #ff0080, #f05, #ff002b, #f00);
+            -webkit-animation: animatedBackground_a 5s linear infinite alternate;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: #0000;
+            background-clip: text;
+        }
+
+        @keyframes animatedBackground_a {
+            0% { background-position: 0 0; }
+            100% { background-position: -500px 0; }
+        }
+
+        @keyframes flashColors {
+            0% { background-color: #ff0000; }
+            16.666% { background-color: #ff8000; }
+            33.333% { background-color: #ffff00; }
+            50% { background-color: #80ff00; }
+            66.666% { background-color: #00ff00; }
+            83.333% { background-color: #00ff80; }
+            100% { background-color: #00ffff; }
+        }
+
+        /* New styles for the added elements */
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background-image: url('your-logo.png'); /* Add your logo's path here */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        .gradient-button {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            background: linear-gradient(to right, #ff9a9e, #fecfef); /* Gradient background */
+            color: #fff;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .gradient-button:hover {
+            background: linear-gradient(to right, #fad0c4, #ffd1ff); /* Gradient background on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="animated_rainbow_1">Games</div>
+        <p>Play Safe Gammmmeezzz</p>
+    </div>
+
+    <!-- New elements -->
+    <div class="overlay">
+        <div class="logo"></div>
+        <a href="https://example.com" class="gradient-button">Start Game</a>
+    </div>
+</body>
+</html>
 
