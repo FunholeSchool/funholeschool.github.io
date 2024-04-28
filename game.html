@@ -18,7 +18,7 @@
 
         .container {
             position: relative;
-            z-index: 1;
+            z-index: 2; /* Above the second box */
             width: 100%;
             height: 200px;
             text-align: center;
@@ -53,43 +53,43 @@
             100% { background-color: #00ffff; }
         }
 
-        /* New styles for the added elements */
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* New styles for the second box */
+        .second-box {
+            position: relative;
+            z-index: 1; /* Below the first box */
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            height: 200px;
+            background-color: #f5f5f5;
             border-radius: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            margin-top: 20px;
         }
 
         .logo {
             width: 100px;
             height: 100px;
-            background-image: url('your-logo.png'); /* Add your logo's path here */
+            background-image: url('your_logo_image_url_here');
             background-size: contain;
             background-repeat: no-repeat;
-            background-position: center center;
+            background-position: center;
+            margin-bottom: 20px;
         }
 
         .gradient-button {
-            display: inline-block;
             padding: 10px 20px;
             border-radius: 20px;
-            background: linear-gradient(to right, #ff9a9e, #fecfef); /* Gradient background */
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
             color: #fff;
-            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
             transition: background 0.3s ease;
         }
 
         .gradient-button:hover {
-            background: linear-gradient(to right, #fad0c4, #ffd1ff); /* Gradient background on hover */
+            background: linear-gradient(to right, #ff4b2b, #ff416c);
         }
     </style>
 </head>
@@ -99,11 +99,10 @@
         <p>Play Safe Gammmmeezzz</p>
     </div>
 
-    <!-- New elements -->
-    <div class="overlay">
+    <!-- Second Box -->
+    <div class="second-box">
         <div class="logo"></div>
-        <a href="https://example.com" class="gradient-button">Start Game</a>
+        <button class="gradient-button">Click Me</button>
     </div>
 </body>
 </html>
-
