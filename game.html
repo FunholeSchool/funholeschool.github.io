@@ -216,69 +216,78 @@
             margin-right: 5px;
         }
 
-        /* Overlay */
-        #overlay {
-            position: fixed;
+        /* Game Container */
+        .game-container {
+            width: 250px; /* Adjust width as needed */
+            height: 400px; /* Adjust height as needed */
+            margin: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .game-image-container {
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .game-image {
+            width: 150px; /* Adjust width as needed */
+            height: auto;
+        }
+
+        .game-name {
+            text-align: center;
+            font-size: 36px; /* Adjust font size as needed */
+            font-weight: bold;
+            padding: 20px 0;
+        }
+
+        .play-button-wrapper {
+            text-align: center;
+        }
+
+        .play-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 20px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(to right, #ff5733, #3333ff);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .play-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .play-button::before {
+            content: "";
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 5;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
+            background: linear-gradient(to right, #ff5733, #3333ff);
+            border-radius: 50px;
+            transition: opacity 0.3s;
+            z-index: -1;
         }
 
-        #overlay.active {
-            opacity: 1;
-            pointer-events: all;
+        .play-button:hover::before {
+            opacity: 0.5;
         }
 
-        /* Connecting to server animation */
-        .connecting-text {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .connecting-dots {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .connecting-dots span {
-            animation: dots 1s infinite;
-            opacity: 0;
-        }
-
-        .connecting-dots span:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-
-        .connecting-dots span:nth-child(3) {
-            animation-delay: 0.2s;
-        }
-
-        @keyframes dots {
-            0% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
-
-        @keyframes animatedBackground_a {
-            0% { background-position: 0 0; }
-            100% { background-position: -500px 0; }
+        .play-button span {
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
@@ -293,52 +302,46 @@
         <button class="gradient-button" onclick="window.open('https://funholeschool.github.io/smashkarts', '_blank')">Click Me</button>
     </div>
 
-    <!-- Game containers -->
-    <div class="container">
-        <div class="image-container">
-            <img class="game-image" src="your-image-url.jpg" alt="Game Image">
+    <!-- Game Containers -->
+    <div style="display: flex;">
+        <div class="game-container">
+            <div class="game-image-container">
+                <img class="game-image" src="your-image-url.jpg" alt="Game Image">
+            </div>
+            <div class="game-name">1v1.LOL</div>
+            <div class="play-button-wrapper">
+                <a href="game-page-url" class="play-button"><span>Play Now</span></a>
+            </div>
         </div>
-        <div class="game-name">
-            1v1.LOL
-        </div>
-        <div class="play-button-wrapper">
-            <a href="game-page-url" class="play-button"><span>Play Now</span></a>
-        </div>
-    </div>
 
-    <div class="container">
-        <div class="image-container">
-            <img class="game-image" src="your-image-url.jpg" alt="Game Image">
+        <div class="game-container">
+            <div class="game-image-container">
+                <img class="game-image" src="your-image-url.jpg" alt="Game Image">
+            </div>
+            <div class="game-name">Game Name</div>
+            <div class="play-button-wrapper">
+                <a href="game-page-url" class="play-button"><span>Play Now</span></a>
+            </div>
         </div>
-        <div class="game-name">
-            Game Name
-        </div>
-        <div class="play-button-wrapper">
-            <a href="game-page-url" class="play-button"><span>Play Now</span></a>
-        </div>
-    </div>
 
-    <div class="container">
-        <div class="image-container">
-            <img class="game-image" src="your-image-url.jpg" alt="Game Image">
+        <div class="game-container">
+            <div class="game-image-container">
+                <img class="game-image" src="your-image-url.jpg" alt="Game Image">
+            </div>
+            <div class="game-name">Game Name</div>
+            <div class="play-button-wrapper">
+                <a href="game-page-url" class="play-button"><span>Play Now</span></a>
+            </div>
         </div>
-        <div class="game-name">
-            Game Name
-        </div>
-        <div class="play-button-wrapper">
-            <a href="game-page-url" class="play-button"><span>Play Now</span></a>
-        </div>
-    </div>
 
-    <div class="container">
-        <div class="image-container">
-            <img class="game-image" src="your-image-url.jpg" alt="Game Image">
-        </div>
-        <div class="game-name">
-            Game Name
-        </div>
-        <div class="play-button-wrapper">
-            <a href="game-page-url" class="play-button"><span>Play Now</span></a>
+        <div class="game-container">
+            <div class="game-image-container">
+                <img class="game-image" src="your-image-url.jpg" alt="Game Image">
+            </div>
+            <div class="game-name">Game Name</div>
+            <div class="play-button-wrapper">
+                <a href="game-page-url" class="play-button"><span>Play Now</span></a>
+            </div>
         </div>
     </div>
 
@@ -439,4 +442,5 @@
     </script>
 </body>
 </html>
+
 
