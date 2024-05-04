@@ -10,15 +10,17 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: transparent;
+            position: relative;
         }
 
         .container {
             position: relative;
-            z-index: 2; /* Above the second box */
+            z-index: 2;
             width: 100%;
             height: 200px;
             text-align: center;
@@ -26,6 +28,7 @@
             border-radius: 20px;
             animation: flashColors 2s infinite alternate;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         .animated_rainbow_1 {
@@ -56,22 +59,23 @@
         /* New styles for the second box */
         .second-box {
             position: relative;
-            z-index: 1; /* Below the first box */
+            z-index: 1;
             width: 100%;
             height: 200px;
-            background-color: #f5f5f5;
+            background-image: url('https://i.ytimg.com/vi/BK__rAEEJ-w/maxresdefault.jpg');
+            background-size: cover;
             border-radius: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
-        .logo {
+        .above-button-image {
             width: 100px;
-            height: 100px;
-            background-image: url('your_logo_image_url_here');
+            height: auto;
+            background-image: url('https://i.ibb.co/C2v9KcL/fs.png');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -91,6 +95,191 @@
         .gradient-button:hover {
             background: linear-gradient(to right, #ff4b2b, #ff416c);
         }
+
+        /* Styles for the menu */
+        .menu-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .menu {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            pointer-events: auto;
+        }
+
+        .menu-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 4;
+        }
+
+        .menu-button:hover .dots::before, .menu-button:hover .dots::after {
+            background: #000;
+        }
+
+        .dots {
+            position: relative;
+            width: 10px;
+            height: 10px;
+        }
+
+        .dots::before, .dots::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #333;
+        }
+
+        .dots::after {
+            top: 15px;
+        }
+
+        .theme-toggle {
+            margin-bottom: 10px;
+        }
+
+        /* Upload Button */
+        .upload-button {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .upload-button:hover {
+            background: linear-gradient(to right, #45a049, #4CAF50);
+        }
+
+        /* Reset Button */
+        .reset-button {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background: linear-gradient(to right, #f44336, #e53935);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .reset-button:hover {
+            background: linear-gradient(to right, #e53935, #f44336);
+        }
+
+        /* Image Type Buttons */
+        .image-type-button {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background: linear-gradient(to right, #2196F3, #1976D2);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .image-type-button:hover {
+            background: linear-gradient(to right, #1976D2, #2196F3);
+        }
+
+        /* Image Type Radio Buttons */
+        .image-type-radio {
+            margin-right: 5px;
+        }
+
+        /* Overlay */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        #overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Connecting to server animation */
+        .connecting-text {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .connecting-dots {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .connecting-dots span {
+            animation: dots 1s infinite;
+            opacity: 0;
+        }
+
+        .connecting-dots span:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .connecting-dots span:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes dots {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes animatedBackground_a {
+            0% { background-position: 0 0; }
+            100% { background-position: -500px 0; }
+        }
     </style>
 </head>
 <body>
@@ -98,11 +287,156 @@
         <div class="animated_rainbow_1">Games</div>
         <p>Play Safe Gammmmeezzz</p>
     </div>
-
-    <!-- Second Box -->
+    
     <div class="second-box">
-        <div class="logo"></div>
-        <button class="gradient-button">Click Me</button>
+        <div class="above-button-image"></div>
+        <button class="gradient-button" onclick="window.open('https://funholeschool.github.io/smashkarts', '_blank')">Click Me</button>
     </div>
+
+    <!-- Game containers -->
+    <div class="container">
+        <div class="image-container">
+            <img class="game-image" src="your-image-url.jpg" alt="Game Image">
+        </div>
+        <div class="game-name">
+            1v1.LOL
+        </div>
+        <div class="play-button-wrapper">
+            <a href="game-page-url" class="play-button"><span>Play Now</span></a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image-container">
+            <img class="game-image" src="your-image-url.jpg" alt="Game Image">
+        </div>
+        <div class="game-name">
+            Game Name
+        </div>
+        <div class="play-button-wrapper">
+            <a href="game-page-url" class="play-button"><span>Play Now</span></a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image-container">
+            <img class="game-image" src="your-image-url.jpg" alt="Game Image">
+        </div>
+        <div class="game-name">
+            Game Name
+        </div>
+        <div class="play-button-wrapper">
+            <a href="game-page-url" class="play-button"><span>Play Now</span></a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image-container">
+            <img class="game-image" src="your-image-url.jpg" alt="Game Image">
+        </div>
+        <div class="game-name">
+            Game Name
+        </div>
+        <div class="play-button-wrapper">
+            <a href="game-page-url" class="play-button"><span>Play Now</span></a>
+        </div>
+    </div>
+
+    <!-- Menu button -->
+    <div class="menu-button" onclick="toggleMenu()">
+        <div class="dots"></div>
+    </div>
+
+    <!-- Menu -->
+    <div class="menu-container" id="menuContainer">
+        <div class="menu">
+            <div class="theme-toggle">
+                <button class="gradient-button" onclick="changeTheme()">Toggle Theme</button>
+            </div>
+            <button class="upload-button" onclick="document.getElementById('fileInput').click()">Upload Image</button>
+            <input type="file" id="fileInput" style="display: none;" onchange="setBackground(event)">
+            <button class="reset-button" onclick="resetBackground()">Reset Background</button>
+            <div>
+                <button class="image-type-button" onclick="changeImageType('fitted')">Fitted</button>
+                <button class="image-type-button" onclick="changeImageType('multiple')">Multiple</button>
+            </div>
+            <div>
+                <input type="radio" class="image-type-radio" id="fitted" name="imageType" value="fitted">
+                <label for="fitted">Fitted</label>
+                <input type="radio" class="image-type-radio" id="multiple" name="imageType" value="multiple">
+                <label for="multiple">Multiple</label>
+            </div>
+            <button class="gradient-button">Default</button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay">
+        <div class="connecting-text">Connecting to Server</div>
+        <div class="connecting-dots">
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menuContainer");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+
+        function changeTheme() {
+            var theme = document.body.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme';
+            document.body.className = theme;
+            localStorage.setItem('theme', theme);
+        }
+
+        function setBackground(event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var body = document.querySelector('body');
+                body.style.backgroundImage = 'url(' + e.target.result + ')';
+                localStorage.setItem('background', e.target.result);
+                toggleOverlay(); // Toggle overlay when background is set
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function resetBackground() {
+            var body = document.querySelector('body');
+            body.style.backgroundImage = 'none';
+            localStorage.removeItem('background');
+            toggleOverlay(); // Toggle overlay when background is reset
+        }
+
+        function changeImageType(type) {
+            console.log("Image Type: ", type);
+            // Implement change based on image type (fitted or multiple)
+        }
+
+        function toggleOverlay() {
+            var overlay = document.getElementById('overlay');
+            overlay.classList.toggle('active');
+            setTimeout(function() {
+                overlay.classList.remove('active');
+            }, 2000); // 2 seconds
+        }
+
+        // Apply theme from local storage on page load
+        var savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.className = savedTheme;
+        }
+
+        // Apply background from local storage on page load
+        var savedBackground = localStorage.getItem('background');
+        if (savedBackground) {
+            var body = document.querySelector('body');
+            body.style.backgroundImage = 'url(' + savedBackground + ')';
+        }
+    </script>
 </body>
 </html>
+
