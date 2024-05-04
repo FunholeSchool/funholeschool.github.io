@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profiles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .top-bar {
+            background: linear-gradient(to right, #4e7fff, #2957d7);
+            color: #fff;
+            padding: 10px 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .profiles-text {
+            display: flex;
+            align-items: center;
+        }
+        .search-bar {
+            width: 300px;
+            padding: 8px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            margin-left: auto;
+        }
+        .make-profile-button {
+            background: linear-gradient(to right, #4e7fff, #2957d7);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .make-profile-button:hover {
+            background: linear-gradient(to right, #2957d7, #4e7fff);
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .profile {
+            position: relative;
+            width: 200px;
+            height: 250px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 10px;
+        }
+        .profile img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .profile .info {
+            padding: 10px;
+        }
+        .profile h2 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            margin: 0;
+        }
+        .profile p {
+            color: #666;
+            margin: 5px 0;
+        }
+        .three-dots {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .menu {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 10px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .menu li {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .menu li:hover {
+            background: #f0f0f0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .modal-content h2 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .modal-content button {
+            padding: 10px 20px;
+            background-color: #4e7fff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .create-profile-form {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .create-profile-form input[type="file"],
+        .create-profile-form input[type="text"],
+        .create-profile-form textarea {
+            width: calc(100% - 40px);
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .create-profile-form button {
+            width: calc(100% - 40px);
+            padding: 10px;
+            background-color: #4e7fff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <div class="profiles-text">
+        <h1 style="font-family: 'Roboto', sans-serif; font-weight: bold; margin: 0;">Profiles</h1>
+    </div>
+    <input type="text" class="search-bar" id="searchInput" onkeyup="searchProfiles()" placeholder="Search profiles...">
+    <button class="make-profile-button" onclick="toggleCreateProfile()">Make A Profile</button>
+</div>
+
+<div class="container">
+    <!-- Profiles will be dynamically added here -->
+</div>
+
+<div class="create-profile-form" id="createProfileForm">
+    <h2>Create Profile</h2>
+    <form id="profileForm">
+        <input type="file" accept="image/*" id="profileImage" required><br>
+        <input type="text" placeholder="Username" id="username" required><br>
+        <span id="usernameError" class="error"></span><br>
+        <textarea placeholder="Description" id="description" required></textarea><br>
+        <button type="submit">Create Profile</button>
+    </form>
+</div>
+
+<div class="create-profile-form" id="editProfileForm">
+    <h2>Edit Profile</h2>
+    <form id="editForm">
+        <input type="file" accept="image/*" id="editProfileImage"><br>
+        <input type="text" placeholder="Username" id="editUsername" required><br>
+        <span id="editUsernameError" class="error"></span><br>
+        <textarea placeholder="Description" id="editDescription" required></textarea><br>
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <h2>Delete Profile</h2>
+        <p>Do you want to delete your profile?</p>
+        <button onclick="deleteProfile()" id="yesButton">Yes</button>
+        <button onclick="closeModal()">No</button>
+    </div>
+</div>
+
+<script>
+    var profiles = [];
+    var badWords = ["fuck", "shit", "nigger", "damn", "bastard", "bitch", "cunt", "bugger", "piss"];
+
+    // Load profiles from localStorage on page load
+    window.onload = function() {
+        if (localStorage.getItem('profiles')) {
+            profiles = JSON.parse(localStorage.getItem('profiles'));
+            displayProfiles();
+        }
+    };
+
+    function toggleCreateProfile() {
+        var createProfileForm = document.getElementById("createProfileForm");
+        if (createProfileForm.style.display === "none" || createProfileForm.style.display === "") {
+            createProfileForm.style.display = "block";
+        } else {
+            createProfileForm.style.display = "none";
+        }
+    }
+
+    function toggleMenu(menuId) {
+        var menu = document.getElementById(menuId);
+        if (menu.style.display === "none" || menu.style.display === "") {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
+    }
+
+    function toggleEditProfile(profileId) {
+        var editProfileForm = document.getElementById("editProfileForm");
+        var profile = profiles.find(profile => profile.id === profileId);
+        document.getElementById("editUsername").value = profile.username;
+        document.getElementById("editDescription").value = profile.description;
+        document.getElementById("editForm").onsubmit = function(event) {
+            event.preventDefault();
+            editProfile(profileId);
+        };
+        if (editProfileForm.style.display === "none" || editProfileForm.style.display === "") {
+            editProfileForm.style.display = "block";
+        } else {
+            editProfileForm.style.display = "none";
+        }
+    }
+
+    function editProfile(profileId) {
+        var profileIndex = profiles.findIndex(profile => profile.id === profileId);
+        var profile = profiles[profileIndex];
+        var newUsername = document.getElementById("editUsername").value.trim().toLowerCase();
+        var newDescription = document.getElementById("editDescription").value.trim();
+
+        // Check for duplicate usernames
+        if (profiles.some(profile => profile.username.toLowerCase() === newUsername && profile.id !== profileId)) {
+            document.getElementById("editUsernameError").innerText = "Username already exists. Please choose a different username.";
+            return;
+        }
+
+        // Check for inappropriate content
+        if (containsBadWord(newUsername) || containsBadWord(newDescription)) {
+            document.getElementById("editUsernameError").innerText = "Ha! You bad boy! Why you say a bad word?";
+            return;
+        }
+
+        profile.username = newUsername;
+        profile.description = newDescription;
+
+        // Update profile image if a new image is selected
+        var editProfileImage = document.getElementById("editProfileImage").files[0];
+        if (editProfileImage) {
+            profile.image = URL.createObjectURL(editProfileImage);
+        }
+
+        saveProfiles();
+        displayProfiles();
+        document.getElementById("editProfileForm").style.display = "none";
+    }
+
+    function confirmDelete(profileId) {
+        var deleteModal = document.getElementById("deleteModal");
+        document.getElementById("yesButton").setAttribute("data-profile-id", profileId);
+        deleteModal.style.display = "block";
+    }
+
+    function deleteProfile() {
+        var deleteModal = document.getElementById("deleteModal");
+        var profileId = document.getElementById("yesButton").getAttribute("data-profile-id");
+        var profileIndex = profiles.findIndex(profile => profile.id === profileId);
+        profiles.splice(profileIndex, 1);
+        saveProfiles();
+        displayProfiles();
+        deleteModal.style.display = "none";
+    }
+
+    function closeModal() {
+        var deleteModal = document.getElementById("deleteModal");
+        deleteModal.style.display = "none";
+    }
+
+    function containsBadWord(text) {
+        return badWords.some(word => text.toLowerCase().includes(word));
+    }
+
+    // Function to save profiles to localStorage
+    function saveProfiles() {
+        localStorage.setItem('profiles', JSON.stringify(profiles));
+    }
+
+    // Function to display profiles
+    function displayProfiles() {
+        var container = document.querySelector(".container");
+        container.innerHTML = '';
+        profiles.forEach(function(profile) {
+            var div = document.createElement("div");
+            div.classList.add("profile");
+            div.id = profile.id;
+            var img = document.createElement("img");
+            img.src = profile.image;
+            var info = document.createElement("div");
+            info.classList.add("info");
+            var h2 = document.createElement("h2");
+            h2.textContent = profile.username;
+            var p = document.createElement("p");
+            p.textContent = profile.description;
+
+            // Add three dots if the user is the profile owner
+            if (profile.userId === 'user1') {
+                var dots = document.createElement("div");
+                dots.classList.add("three-dots");
+                dots.innerHTML = "&#8942;";
+                dots.setAttribute("onclick", "toggleMenu('menu" + profile.id + "')");
+                var menu = document.createElement("div");
+                menu.classList.add("menu");
+                menu.id = "menu" + profile.id;
+                var ul = document.createElement("ul");
+                var editLi = document.createElement("li");
+                editLi.textContent = "Edit Profile";
+                editLi.setAttribute("onclick", "toggleEditProfile('" + profile.id + "')");
+                var deleteLi = document.createElement("li");
+                deleteLi.textContent = "Delete Profile";
+                deleteLi.setAttribute("onclick", "confirmDelete('" + profile.id + "')");
+
+                ul.appendChild(editLi);
+                ul.appendChild(deleteLi);
+                menu.appendChild(ul);
+                div.appendChild(dots);
+                div.appendChild(menu);
+            }
+
+            info.appendChild(h2);
+            info.appendChild(p);
+            div.appendChild(img);
+            div.appendChild(info);
+            container.appendChild(div);
+        });
+    }
+
+    document.getElementById("profileForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        var profileImage = document.getElementById("profileImage").files[0];
+        var username = document.getElementById("username").value.trim().toLowerCase();
+        var description = document.getElementById("description").value.trim();
+
+        // Check for duplicate usernames
+        if (profiles.some(profile => profile.username.toLowerCase() === username)) {
+            document.getElementById("usernameError").innerText = "Username already exists. Please choose a different username.";
+            return;
+        }
+
+        // Check for inappropriate content
+        if (containsBadWord(username) || containsBadWord(description)) {
+            document.getElementById("usernameError").innerText = "Ha! You bad boy! Why you say a bad word?";
+            return;
+        }
+
+        var profile = {
+            id: 'profile-' + Date.now(),
+            userId: 'user1', // Sample user ID, replace with actual user ID or authentication mechanism
+            image: URL.createObjectURL(profileImage),
+            username: username,
+            description: description
+        };
+        profiles.push(profile);
+        saveProfiles();
+        displayProfiles();
+        document.getElementById("createProfileForm").style.display = "none";
+    });
+
+    // Function to filter profiles based on search input
+    function searchProfiles() {
+        var input = document.getElementById("searchInput").value.toLowerCase();
+        var container = document.querySelector(".container");
+        var profiles = container.getElementsByClassName("profile");
+        for (var i = 0; i < profiles.length; i++) {
+            var username = profiles[i].getElementsByClassName("info")[0].getElementsByTagName("h2")[0].innerText.toLowerCase();
+            if (username.indexOf(input) > -1) {
+                profiles[i].style.display = "";
+            } else {
+                profiles[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
