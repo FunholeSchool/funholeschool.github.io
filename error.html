@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error!</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.freepik.com/256/4201/4201973.png?semt=ais_hybrid"> <!-- PNG favicon -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Adjusted to stack elements vertically */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Set minimum height to ensure the box is visible */
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .rounded-container {
+            width: 400px; /* Adjusted width */
+            height: 400px; /* Adjusted height */
+            padding: 20px;
+            border-radius: 20px;
+            background-color: var(--box-color);
+            transition: background-color 0.3s ease;
+            margin-top: 20px; /* Adjusted margin from the top */
+            text-align: center; /* Center align content */
+        }
+
+        .rounded-box {
+            width: 300px; /* Smaller box */
+            height: 300px; /* Smaller box */
+            background-color: var(--box-color);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+            margin: 0 auto; /* Center the box horizontally */
+        }
+
+        .rounded-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .rounded-box:hover {
+            transform: scale(1.1);
+        }
+
+        .error-text {
+            font-family: 'Roboto', sans-serif;
+            font-size: 36px; /* Larger font size */
+            font-weight: bold;
+            color: red;
+            animation: flash 1s infinite alternate; /* Flashing animation */
+            margin-top: 20px; /* Adjusted margin from the top */
+        }
+
+        @keyframes flash {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        .description {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px; /* Adjusted margin from the top */
+            line-height: 1.5; /* Increased line height */
+        }
+
+        .rounded-container:hover {
+            background-color: #f8f8f8; /* Adjust hover background color */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Smooth hover effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="rounded-container">
+        <div class="rounded-box">
+            <img src="https://via.placeholder.com/500" alt="Placeholder image">
+        </div>
+
+        <div class="error-text">
+            Error <!-- Changed text to "Error" -->
+        </div>
+
+        <div class="description">
+            Sorry Funhole Sch00L has run into a problem. Please try again later.
+        </div>
+    </div>
+
+    <script>
+        const darkThemeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function toggleTheme() {
+            if (darkThemeMediaQuery.matches) {
+                document.documentElement.style.setProperty('--bg-color', '#121212');
+                document.documentElement.style.setProperty('--box-color', '#323232');
+            } else {
+                document.documentElement.style.setProperty('--bg-color', '#ffffff');
+                document.documentElement.style.setProperty('--box-color', '#f0f0f0');
+            }
+        }
+
+        darkThemeMediaQuery.addListener(toggleTheme);
+        toggleTheme();
+    </script>
+</body>
+</html>
