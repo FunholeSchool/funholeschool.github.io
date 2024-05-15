@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Player</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        text-align: center;
+    }
+    input {
+        font-weight: bold;
+        padding: 8px;
+        margin-top: 20px;
+        width: 300px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+    }
+    #player {
+        margin-top: 20px;
+        transition: transform 0.3s ease;
+    }
+    #player:hover {
+        transform: scale(1.05); /* Scale up slightly on hover */
+    }
+    #player iframe {
+        border-radius: 10px; /* Rounded corners */
+    }
+    #title {
+        font-size: 64px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+    #description {
+        font-size: 12px;
+        margin-top: 10px;
+    }
+    .video-thumbnail {
+        display: inline-block;
+        margin: 10px;
+        cursor: pointer;
+    }
+    .video-thumbnail img {
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+    .video-thumbnail img:hover {
+        transform: scale(1.05); /* Scale up slightly on hover */
+    }
+</style>
+</head>
+<body>
+    <div id="title">Funtube</div>
+    <div id="description">Watch Videos Safely, Unblocked, And Without Ads. No need to worry about inappropriate ads on Youtube.</div>
+    <input type="text" id="videoLink" placeholder="Enter YouTube Video Link">
+    <div id="player"></div>
+    <div id="suggested-videos"></div>
+
+    <script>
+        function playVideo(videoId) {
+            const player = document.getElementById('player');
+            player.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+            fetchSuggestedVideos(videoId);
+        }
+
+        async function fetchSuggestedVideos(videoId) {
+            const response = await fetch(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${videoId}&type=video&key=YOUR_API_KEY&maxResults=5`);
+            const data = await response.json();
+            const videos = data.items;
+            const suggestedVideos = document.getElementById('suggested-videos');
+            suggestedVideos.innerHTML = '';
+            videos.forEach(video => {
+                suggestedVideos.innerHTML += `
+                    <div class="video-thumbnail" onclick="playVideo('${video.id.videoId}')">
+                        <img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}">
+                    </div>
+                `;
+            });
+        }
+
+        const input = document.getElementById('videoLink');
+        input.addEventListener('input', function() {
+            const url = input.value;
+            const videoId = url.split('v=')[1];
+            if (videoId) {
+                const player = document.getElementById('player');
+                player.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+                fetchSuggestedVideos(videoId);
+            }
+        });
+    </script>
+</body>
+</html>
