@@ -14,7 +14,7 @@
     
     .content-box {
       width: 100%; /* Set width to 100% */
-      height: 300px; /* Set height to 400px */
+      height: 300px; /* Set height to 300px */
       background-color: #f0f0f0;
       border-radius: 10px;
       position: relative; /* Needed for centering text */
@@ -28,7 +28,8 @@
       font-family: Roboto, sans-serif;
       font-weight: bold;
       color: #fff;
-      font-size: 100px; /* Smaller font size */
+      /* Increase font size to visually appear larger */
+      font-size: 72px; /* Adjust as needed */
       line-height: 1; /* Adjust line height to prevent overlapping characters */
       margin: 0; /* Remove margins for better space utilization */
       text-align: center; /* Ensure horizontal centering within the box */
@@ -43,52 +44,6 @@
       75% { color: green; }
       100% { color: blue; }
     }
-    
-    /* Styles for the right-click bar */
-    .right-click-bar {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      background-color: #ddd;
-      border-radius: 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-      display: none; /* Initially hidden */
-    }
-    .right-click-bar.active {
-      display: block;
-    }
-    
-    /* Styles for the menu (Chrome DevTools inspired) */
-    .menu {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: #fff;
-      border-radius: 5px;
-      padding: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      border: 1px solid #ddd; /* Chrome DevTools style border */
-      display: none;
-    }
-    .right-click-bar.active .menu {
-      display: block;
-    }
-    .menu ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .menu li {
-      margin-bottom: 5px;
-      /* Mimic Chrome DevTools menu item style */
-      padding: 3px 5px;
-      border-bottom: 1px solid #ddd;
-      cursor: default;
-    }
-    .menu li:hover {
-      background-color: #eee; /* Add hover effect */
-    }
   </style>
 </head>
 <body>
@@ -96,12 +51,7 @@
   <div class="content-box">
     <h1>Games</h1>
   </div>
-  
-  <div class="right-click-bar">Menu</div>
-  <div class="menu">
-    <ul>
-      <li>Background Color: <input type="color" id="bg-color-picker"></li>
-      <li>Theme:
-        <label for="light-theme">Light</label>
-        <input type="radio" id="light-theme" name="theme" value="light">
+
+</body>
+
         <label for="dark-theme">
