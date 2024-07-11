@@ -1,500 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashing Rounded Corner Rectangle</title>
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: transparent;
-            position: relative;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Funhole Box</title>
+  <style>
+    /* Styles for the main content area */
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .content-box {
+      width: 100%; /* Set width to 100% */
+      height: 200px;
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      position: relative; /* Needed for centering text */
+      display: flex; /* Use flexbox for centering */
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      box-sizing: border-box; /* Ensure content fits within width */
+    }
+    .content-box h1 {
+      font-family: Roboto, sans-serif;
+      font-weight: bold;
+      color: #fff;
+      font-size: calc(min(100vh, 15vw) - 20px); /* Consider some padding */
+      line-height: 1; /* Adjust line height to prevent overlapping characters */
+      margin: 0; /* Remove margins for better space utilization */
+      text-align: center; /* Ensure horizontal centering within the box */
+      z-index: 2; /* Ensure text stays above potential background color */
+      animation: rainbow 3s infinite alternate;
+    }
 
-        .container {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            height: 200px;
-            text-align: center;
-            padding: 20px;
-            border-radius: 20px;
-            animation: flashColors 2s infinite alternate;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        .animated_rainbow_1 {
-            font-size: 98px;
-            font-family: Arial Black, Gadget, sans-serif;
-            background-image: -webkit-linear-gradient(left, #f00, #ff2b00, #f50, #ff8000, #fa0, #ffd500, #ff0, #d4ff00, #af0, #80ff00, #5f0, #2bff00, #0f0, #00ff2a, #0f5, #00ff80, #0fa, #00ffd5, #0ff, #00d5ff, #0af, #0080ff, #05f, #002aff, #00f, #2b00ff, #50f, #8000ff, #a0f, #d400ff, #f0f, #ff00d4, #f0a, #ff0080, #f05, #ff002b, #f00);
-            -webkit-animation: animatedBackground_a 5s linear infinite alternate;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: #0000;
-            background-clip: text;
-        }
-
-        @keyframes animatedBackground_a {
-            0% { background-position: 0 0; }
-            100% { background-position: -500px 0; }
-        }
-
-        @keyframes flashColors {
-            0% { background-color: #ff0000; }
-            16.666% { background-color: #ff8000; }
-            33.333% { background-color: #ffff00; }
-            50% { background-color: #80ff00; }
-            66.666% { background-color: #00ff00; }
-            83.333% { background-color: #00ff80; }
-            100% { background-color: #00ffff; }
-        }
-
-        /* New styles for the second box */
-        .second-box {
-            position: relative;
-            z-index: 1;
-            width: 80%;
-            height: 400px;
-            background-image: url('https://i.ytimg.com/vi/BK__rAEEJ-w/maxresdefault.jpg');
-            background-size: cover;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .above-button-image {
-            width: 100px;
-            height: auto;
-            background-image: url('https://i.ibb.co/C2v9KcL/fs.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            margin-bottom: 20px;
-        }
-
-        .gradient-button {
-            padding: 10px 20px;
-            border-radius: 20px;
-            background: linear-gradient(to right, #ff416c, #ff4b2b);
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .gradient-button:hover {
-            background: linear-gradient(to right, #ff4b2b, #ff416c);
-        }
-
-        /* Styles for the menu */
-        .menu-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        .menu {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-            pointer-events: auto;
-        }
-
-        .menu-button {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.8);
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 4;
-        }
-
-        .menu-button:hover .dots::before, .menu-button:hover .dots::after {
-            background: #000;
-        }
-
-        .dots {
-            position: relative;
-            width: 10px;
-            height: 10px;
-        }
-
-        .dots::before, .dots::after {
-            content: '';
-            position: absolute;
-            top: -15px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #333;
-        }
-
-        .dots::after {
-            top: 15px;
-        }
-
-        .theme-toggle {
-            margin-bottom: 10px;
-        }
-
-        /* Upload Button */
-        .upload-button {
-            padding: 10px 20px;
-            border-radius: 20px;
-            background: linear-gradient(to right, #4CAF50, #45a049);
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            margin-bottom: 10px;
-        }
-
-        .upload-button:hover {
-            background: linear-gradient(to right, #45a049, #4CAF50);
-        }
-
-        /* Reset Button */
-        .reset-button {
-            padding: 10px 20px;
-            border-radius: 20px;
-            background: linear-gradient(to right, #f44336, #e53935);
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            margin-bottom: 10px;
-        }
-
-        .reset-button:hover {
-            background: linear-gradient(to right, #e53935, #f44336);
-        }
-
-        /* Image Type Buttons */
-        .image-type-button {
-            padding: 10px 20px;
-            border-radius: 20px;
-            background: linear-gradient(to right, #2196F3, #1976D2);
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            margin-bottom: 10px;
-        }
-
-        .image-type-button:hover {
-            background: linear-gradient(to right, #1976D2, #2196F3);
-        }
-
-        /* Image Type Radio Buttons */
-        .image-type-radio {
-            margin-right: 5px;
-        }
-
-        /* Game Containers */
-        .games-container {
-            display: flex;
-            justify-content: space-between;
-            width: 80%;
-        }
-
-        .game-container {
-            width: 23%;
-            height: 400px;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .game-image-container {
-            text-align: center;
-            padding-top: 50px;
-        }
-
-        .game-image {
-            width: 150px;
-            height: auto;
-        }
-
-        .game-name {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            padding: 20px 0;
-        }
-
-        .play-button-wrapper {
-            text-align: center;
-        }
-
-        .play-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px 30px;
-            font-size: 20px;
-            text-align: center;
-            color: white;
-            background: linear-gradient(to right, #ff5733, #3333ff);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none; /* Remove underline */
-        }
-
-        .play-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .play-button::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, #ff5733, #3333ff);
-            border-radius: 50px;
-            transition: opacity 0.3s;
-            z-index: -1;
-        }
-
-        .play-button:hover::before {
-            opacity: 0.5;
-        }
-
-        .play-button span {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Overlay */
-        #overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 5;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-            backdrop-filter: blur(5px);
-        }
-
-        #overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .connecting-text {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .connecting-dots {
-            font-size: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .connecting-dots span {
-            animation: blink 1s infinite;
-            opacity: 0;
-            margin: 0 5px;
-        }
-
-        @keyframes blink {
-            0%, 100% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-    </style>
+    @keyframes rainbow {
+      0% { color: red; }
+      25% { color: orange; }
+      50% { color: yellow; }
+      75% { color: green; }
+      100% { color: blue; }
+    }
+    
+    /* Styles for the right-click bar */
+    .right-click-bar {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background-color: #ddd;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      display: none; /* Initially hidden */
+    }
+    .right-click-bar.active {
+      display: block;
+    }
+    
+    /* Styles for the menu */
+    .menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+    .right-click-bar.active .menu {
+      display: block;
+    }
+    .menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu li {
+      margin-bottom: 5px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="animated_rainbow_1">Games</div>
-        <p>Play Safe Gammmmeezzz</p>
-    </div>
-    
-    <div class="second-box">
-        <div class="above-button-image"></div>
-        <button class="gradient-button" onclick="window.open('https://funholeschool.github.io/smashkarts', '_blank')">Click Me</button>
-    </div>
 
-    <!-- Game Containers -->
-    <div class="games-container">
-        <div class="game-container">
-            <div class="game-image-container">
-                <img class="game-image" src="your-image-url.jpg" alt="Game Image">
-            </div>
-            <div class="game-name">1v1.LOL</div>
-            <div class="play-button-wrapper">
-                <a href="game-page-url" class="play-button"><span>Play Now</span></a>
-            </div>
-        </div>
+  <div class="content-box">
+    <h1>Funhole</h1>
+  </div>
+  
+  <div class="right-click-bar">Menu</div>
+  <div class="menu">
+    <ul>
+      <li>Background Color: <input type="color" id="bg-color-picker"></li>
+      <li>Theme:
+        <label for="light-theme">Light</label>
+        <input type="radio" id="light-theme" name="theme" value="light">
+        <label for="dark-theme">Dark</label>
+        <input type="radio" id="dark-theme" name="theme" value="dark">
+      </li>
+    </ul>
+  </div>
 
-        <div class="game-container">
-            <div class="game-image-container">
-                <img class="game-image" src="your-image-url.jpg" alt="Game Image">
-            </div>
-            <div class="game-name">Game Name</div>
-            <div class="play-button-wrapper">
-                <a href="game-page-url" class="play-button"><span>Play Now</span></a>
-            </div>
-        </div>
-
-        <div class="game-container">
-            <div class="game-image-container">
-                <img class="game-image" src="your-image-url.jpg" alt="Game Image">
-            </div>
-            <div class="game-name">Game Name</div>
-            <div class="play-button-wrapper">
-                <a href="game-page-url" class="play-button"><span>Play Now</span></a>
-            </div>
-        </div>
-
-        <div class="game-container">
-            <div class="game-image-container">
-                <img class="game-image" src="your-image-url.jpg" alt="Game Image">
-            </div>
-            <div class="game-name">Game Name</div>
-            <div class="play-button-wrapper">
-                <a href="game-page-url" class="play-button"><span>Play Now</span></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Menu button -->
-    <div class="menu-button" onclick="toggleMenu()">
-        <div class="dots"></div>
-    </div>
-
-    <!-- Menu -->
-    <div class="menu-container" id="menuContainer">
-        <div class="menu">
-            <div class="theme-toggle">
-                <button class="gradient-button" onclick="changeTheme()">Toggle Theme</button>
-            </div>
-            <button class="upload-button" onclick="document.getElementById('fileInput').click()">Upload Image</button>
-            <input type="file" id="fileInput" style="display: none;" onchange="setBackground(event)">
-            <button class="reset-button" onclick="resetBackground()">Reset Background</button>
-            <div>
-                <button class="image-type-button" onclick="changeImageType('fitted')">Fitted</button>
-                <button class="image-type-button" onclick="changeImageType('multiple')">Multiple</button>
-            </div>
-            <div>
-                <input type="radio" class="image-type-radio" id="fitted" name="imageType" value="fitted">
-                <label for="fitted">Fitted</label>
-                <input type="radio" class="image-type-radio" id="multiple" name="imageType" value="multiple">
-                <label for="multiple">Multiple</label>
-            </div>
-            <button class="gradient-button">Default</button>
-        </div>
-    </div>
-
-    <!-- Overlay -->
-    <div id="overlay">
-        <div class="connecting-text">Connecting to Server</div>
-        <div class="connecting-dots">
-            <span>.</span>
-            <span>.</span>
-            <span>.</span>
-        </div>
-    </div>
-
-    <script>
-        function toggleMenu() {
-            var menu = document.getElementById("menuContainer");
-            menu.style.display = (menu.style.display === "block") ? "none" : "block";
-        }
-
-        function changeTheme() {
-            var theme = document.body.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme';
-            document.body.className = theme;
-            localStorage.setItem('theme', theme);
-        }
-
-        function setBackground(event) {
-            var file = event.target.files[0];
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var body = document.querySelector('body');
-                body.style.backgroundImage = 'url(' + e.target.result + ')';
-                localStorage.setItem('background', e.target.result);
-                toggleOverlay(); // Toggle overlay when background is set
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function resetBackground() {
-            var body = document.querySelector('body');
-            body.style.backgroundImage = 'none';
-            localStorage.removeItem('background');
-            toggleOverlay(); // Toggle overlay when background is reset
-        }
-
-        function changeImageType(type) {
-            console.log("Image Type: ", type);
-            // Implement change based on image type (fitted or multiple)
-        }
-
-        function toggleOverlay() {
-            var overlay = document.getElementById('overlay');
-            overlay.classList.toggle('active');
-            setTimeout(function() {
-                overlay.classList.remove('active');
-            }, 2000); // 2 seconds
-        }
-
-        // Apply theme from local storage on page load
-        var savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.body.className = savedTheme;
-        }
-
-        // Apply background from local storage on page load
-        var savedBackground = localStorage.getItem('background');
-        if (savedBackground) {
-            var body = document.querySelector('body');
-            body.style.backgroundImage = 'url(' + savedBackground + ')';
-        }
-    </script>
-</body>
-</html>
+  <script>
+    const contentBox = document.querySelector('.content-box');
+    const rightClickBar = document.querySelector('.right-click-bar');
+    const menu = document.
